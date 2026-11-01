@@ -1,0 +1,7 @@
+# Netlify build settings. Lint and tests run first so invalid reference data never deploys.
+[build]
+  command = "npm run lint && npm run test && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"

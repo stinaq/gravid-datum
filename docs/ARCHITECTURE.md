@@ -161,6 +161,12 @@ export const ResultCard = ({ title, cost, highlighted }: ResultCardProps) => (
   a custom picker. (v10 also publishes as `@daypicker/react`, which has the same API.)
 - Date math: `date-fns` (`differenceInCalendarDays`, `addDays`, `format`).
 
+## Deployment
+
+- Netlify, configured in `netlify.toml`: a static build of `dist/`, deployed from `main`.
+- The Netlify build runs lint and tests before `vite build`, so a failing check (including
+  invalid reference data) stops the deploy and the previous version stays live.
+
 ## Testing
 
 - Vitest. Tests sit next to the code: `foo.ts` -> `foo.test.ts`.
