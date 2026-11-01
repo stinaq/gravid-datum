@@ -20,6 +20,12 @@ one-handed. One thing in focus at a time.
 - **Not a table.** Each column is a vertical stack of `label → value unit`, with gestational
   age (`12+3`) as the column heading.
 
+## Icon
+
+- A very simplified white silhouette of a pregnant person in profile, on the accent teal.
+- `public/favicon.svg` is the source. `public/apple-touch-icon.png` (180×180, square corners
+  because iOS rounds them) is rendered from it for the phone home screen.
+
 ## Tokens
 
 To be defined (colors, type scale, spacing) as CSS custom properties in `src/styles/global.scss`.
