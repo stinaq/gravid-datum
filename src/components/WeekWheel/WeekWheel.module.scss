@@ -1,0 +1,57 @@
+.viewport {
+  // clip (not hidden): a focused side column must not scroll the wheel sideways.
+  overflow: clip;
+  touch-action: pan-y;
+  // Fade the side columns out towards the screen edges, like a dial that continues.
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.wheel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-rows: repeat(var(--rows), auto);
+  column-gap: var(--space-2);
+  // Push the side columns partly outside the viewport.
+  margin: 0 -4%;
+  padding: var(--space-2) 0 var(--space-4);
+}
+
+.slot {
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: subgrid;
+  min-width: 0;
+}
+
+.none {
+  animation: none;
+}
+
+.fromRight {
+  animation: from-right 220ms ease-out;
+}
+
+.fromLeft {
+  animation: from-left 220ms ease-out;
+}
+
+@keyframes from-right {
+  from {
+    transform: translateX(18%);
+    opacity: 0.4;
+  }
+}
+
+@keyframes from-left {
+  from {
+    transform: translateX(-18%);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fromRight,
+  .fromLeft {
+    animation: none;
+  }
+}

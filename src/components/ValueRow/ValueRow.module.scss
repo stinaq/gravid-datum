@@ -1,0 +1,49 @@
+%row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.main {
+  @extend %row;
+}
+
+.side {
+  @extend %row;
+
+  .label,
+  .note {
+    display: none;
+  }
+}
+
+.label {
+  color: var(--color-muted);
+  font-size: var(--font-small);
+}
+
+.value {
+  font-size: 1.15em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.noData {
+  color: var(--color-muted);
+  font-size: var(--font-small);
+  font-style: italic;
+}
+
+.side .noData {
+  font-size: var(--font-tiny);
+}
+
+.note {
+  color: var(--color-muted);
+  font-size: var(--font-tiny);
+}

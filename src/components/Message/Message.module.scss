@@ -1,0 +1,9 @@
+.message {
+  margin: 0;
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  text-align: center;
+  font-weight: 600;
+}
