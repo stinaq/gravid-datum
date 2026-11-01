@@ -14,8 +14,9 @@ one-handed. One thing in focus at a time.
 - **Date inputs** at the top: Senaste mens, Datum, and BF shown next to them.
 - **Week wheel:** three columns side by side, like a dial.
   - The center column (current week) is in focus: full contrast, largest type.
-  - The side columns (previous and next week) are smaller, faded and partly cropped at the
-    screen edges, so it reads as a wheel that continues.
+  - The side columns (previous and next week) are smaller and faded, and fade out slightly at
+    the screen edges, so it reads as a wheel that continues. Their values must stay fully
+    readable.
   - Spinning animates the neighbour into the center.
 - **Not a table.** Each column is a vertical stack of `label → value unit`, with gestational
   age (`12+3`) as the column heading.
