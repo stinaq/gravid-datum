@@ -18,9 +18,19 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: border-color 150ms;
+
+  &:hover {
+    border-color: var(--color-sage);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 
   &[aria-expanded='true'] {
-    border-color: var(--color-accent);
+    border-color: var(--color-primary);
   }
 }
 
@@ -32,6 +42,7 @@
 .value {
   font-size: var(--font-body);
   font-weight: 600;
+  color: var(--color-primary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -46,6 +57,7 @@
 
 // Theme the date picker library.
 .calendar :global(.rdp-root) {
-  --rdp-accent-color: var(--color-accent);
-  --rdp-accent-background-color: var(--color-accent-bg);
+  --rdp-accent-color: var(--color-primary);
+  --rdp-accent-background-color: var(--color-sage-bg);
+  --rdp-today-color: var(--color-warm-text);
 }

@@ -21,7 +21,7 @@ export const TEXTS = {
   dueDateLabel: 'Beräknat förlossningsdatum (BF)',
   gestationalAgeLabel: 'Graviditetslängd',
   daysLabel: 'Dagar sedan senaste mens',
-  noData: 'Ingen data för denna vecka',
+  noData: 'Ingen data',
   valuesFor: 'värden för',
   previousWeek: 'Föregående vecka',
   nextWeek: 'Nästa vecka',

@@ -66,7 +66,7 @@ All values are whole numbers with no decimals. Numbers use Swedish formatting (e
 - **Start and end** come from the first and last entry in each file. There is no separate
   config for them.
 - Each value shows the age of the entry it came from, e.g. `värden för 12+0`.
-- Outside a measure's data, show `Ingen data för denna vecka` in its place, so the layout
+- Outside a measure's data, show `Ingen data` in its place, so the layout
   stays stable.
 - The source is not shown in the UI, but it is written at the top of each data file.
 
@@ -76,9 +76,12 @@ All values are whole numbers with no decimals. Numbers use Swedish formatting (e
 - To the left and right, the previous and next week are shown with their F4 values and
   gestational age, less prominent. Their values line up with the center column's rows, so
   they show the value only, without the label or the `värden för` note.
-- Swiping or tapping a side column moves the **reference date** ±7 days. That date shows in
+- Swiping, tapping a side column, or pressing the previous/next buttons moves the
+  **reference date** ±7 days. The buttons sit above the wheel, and on touch devices also below
+  it. That date shows in
   the date picker, and F1/F2/F4 follow. The `+d` part stays the same.
-- At the range limits the missing neighbour is shown empty, and you can't spin past it.
+- At the range limits the missing neighbour is shown empty, its button is hidden, and you
+  can't spin past it.
 
 ## Validation
 
@@ -97,8 +100,8 @@ All values are whole numbers with no decimals. Numbers use Swedish formatting (e
 - [ ] Reference date before LMP → error, no values.
 - [ ] `42+6` → values shown. `43+0` → error.
 - [ ] With weekly data, `12+0` and `12+6` show the week-12 entry, labeled `värden för 12+0`.
-- [ ] If week 13 is missing from a file, `13+x` shows `Ingen data för denna vecka` for that measure.
-- [ ] Before a measure's first entry and after its last week → `Ingen data för denna vecka`.
+- [ ] If week 13 is missing from a file, `13+x` shows `Ingen data` for that measure.
+- [ ] Before a measure's first entry and after its last week → `Ingen data`.
 - [ ] Symfys-fundusmått renders as `min–max cm`. The others render as `value unit`.
 - [ ] Spinning to the next week sets the reference date to +7 days and the date picker shows it.
 - [ ] At `0+x` there is no previous week. At `42+x` there is no next week.

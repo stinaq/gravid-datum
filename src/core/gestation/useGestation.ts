@@ -25,6 +25,9 @@ export const useGestation = () => {
     setDate(spinDate(lmp, date, direction));
   };
 
+  const spinPrevious = () => spin(-1);
+  const spinNext = () => spin(1);
+
   const toggle = (picker: Exclude<OpenPicker, null>) =>
     setOpenPicker(openPicker === picker ? null : picker);
 
@@ -67,8 +70,16 @@ export const useGestation = () => {
       nextLabel: TEXTS.nextWeek,
       animation: spinAnimation(lastSpin),
       animationKey: formatDate(date),
-      onPrevious: () => spin(-1),
-      onNext: () => spin(1),
+      onPrevious: spinPrevious,
+      onNext: spinNext,
+      nav: {
+        previousText: view.wheel.previous?.heading,
+        nextText: view.wheel.next?.heading,
+        previousLabel: TEXTS.previousWeek,
+        nextLabel: TEXTS.nextWeek,
+        onPrevious: spinPrevious,
+        onNext: spinNext,
+      },
       onSwipeStart: (x: number) => {
         swipeStartX.current = x;
       },

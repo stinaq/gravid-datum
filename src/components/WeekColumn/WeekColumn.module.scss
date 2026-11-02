@@ -30,6 +30,12 @@
   &:focus-visible {
     opacity: 0.85;
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-small);
+  }
 }
 
 .header {
@@ -44,19 +50,23 @@
 
 .headingLabel {
   color: var(--color-muted);
-  font-size: var(--font-small);
+  font-size: var(--font-tiny);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .heading {
   font-size: 1.6em;
   font-weight: 700;
   line-height: 1.1;
+  color: var(--color-primary);
   font-variant-numeric: tabular-nums;
 }
 
 .main .heading {
-  font-size: 2em;
-  color: var(--color-accent);
+  font-size: 2.25em;
+  letter-spacing: -0.02em;
 }
 
 .subheading {
@@ -64,6 +74,6 @@
   font-size: var(--font-small);
 
   strong {
-    color: var(--color-text);
+    color: var(--color-primary);
   }
 }
