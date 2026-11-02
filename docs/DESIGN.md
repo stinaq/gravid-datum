@@ -14,15 +14,17 @@ like an old hospital system: warm off-white, deep teal, lots of whitespace, soft
   other way around.
 - **Date inputs** at the top: Senaste mens, Datum, and BF shown next to them.
 - **Week wheel:** three columns side by side, like a dial.
-  - The center column (current week) is in focus: full contrast, largest type.
-  - The side columns (previous and next week) are smaller and faded, and fade out slightly at
-    the screen edges, so it reads as a wheel that continues. Their values must stay fully
-    readable.
+  - The center column (current week) is in focus: full contrast, on a card, with labels and
+    notes.
+  - The side columns (previous and next week) show values only and are faded, and fade out
+    slightly at the screen edges, so it reads as a wheel that continues. Their values must stay
+    fully readable.
+  - All columns use the same text size, so nothing grows or shrinks while it moves.
   - **Spinning is one continuous motion.** Each week keeps its own element and slides to its
-    new slot, restyling on the way (size, card, fade). One more week waits just off-screen on
-    each side to slide in. A drag follows the finger, and on release the wheel carries on from
-    where it was let go. Every column has the center's width, so only its position animates
-    and text never stretches.
+    new slot, restyling on the way (card, fade). One more week waits just off-screen on each
+    side to slide in. A drag follows the finger, and on release the wheel carries on from where
+    it was let go. Every column has the center's width, so only its position animates and text
+    never stretches.
   - **Previous/next buttons** are pill-shaped, each showing the neighbour's age with a chevron
     (`‹ 11+3`, `13+3 ›`). A missing neighbour has no button. They always sit above the wheel.
     On touch devices a second row sits below it, so the thumb reaches one from either end of

@@ -38,26 +38,16 @@
   line-height: 1.15;
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
-  transition: font-size 300ms ease-out;
 }
 
 // Sits where the value would be, as a quiet pill, so it reads as a state, not a heading.
 .noData {
-  padding: 0.15rem var(--space-3);
+  padding: 0.1rem var(--space-2);
   border-radius: 999px;
   background: var(--color-sage-bg);
   color: var(--color-muted);
-  font-size: var(--font-small);
-  line-height: 1.6;
-}
-
-.side .value {
-  font-size: 1.4em;
-}
-
-.side .noData {
-  padding: 0.1rem var(--space-2);
   font-size: var(--font-tiny);
+  line-height: 1.6;
 }
 
 .note {
@@ -78,10 +68,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .value {
-    transition: none;
-  }
-
   .main .label,
   .main .note {
     animation: none;
