@@ -1,14 +1,34 @@
 %column {
+  position: relative;
   grid-row: 1 / -1;
   display: grid;
   grid-template-rows: subgrid;
-  min-width: 0;
+  // The center column's width in every slot. Side columns overflow their slot evenly.
+  justify-self: center;
+  width: var(--column-width);
+  border-radius: var(--radius);
+  // Restyle while the column slides between slots. Sizes inside are in em, so they follow.
+  transition:
+    font-size 300ms ease-out,
+    opacity 300ms ease-out,
+    background-color 300ms ease-out,
+    box-shadow 300ms ease-out;
+}
+
+// The rows (header and values). In a side column they keep to the slot, the middle half.
+%column > :not(.hit) {
+  justify-self: center;
+  width: 100%;
+  transition: width 300ms ease-out;
+}
+
+.side > :not(.hit) {
+  width: 50%;
 }
 
 .main {
   @extend %column;
   padding: 0 var(--space-3) var(--space-2);
-  border-radius: var(--radius);
   background: var(--color-surface);
   box-shadow: var(--shadow);
   font-size: var(--font-body);
@@ -17,24 +37,36 @@
 .side {
   @extend %column;
   padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
+  background: transparent;
+  box-shadow: none;
   font-size: var(--font-small);
   opacity: 0.6;
-  cursor: pointer;
-  transition: opacity 150ms;
 
-  &:hover,
-  &:focus-visible {
+  &:has(.hit:hover),
+  &:has(.hit:focus-visible) {
     opacity: 0.85;
   }
+
+  .headingLabel,
+  .subheading {
+    display: none;
+  }
+}
+
+// Covers a side column's slot (half its width), so the column never has to change element type.
+.hit {
+  position: absolute;
+  inset: 0 25%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-small);
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
-    border-radius: var(--radius-small);
   }
 }
 
@@ -62,6 +94,7 @@
   line-height: 1.1;
   color: var(--color-primary);
   font-variant-numeric: tabular-nums;
+  transition: font-size 300ms ease-out;
 }
 
 .main .heading {
@@ -75,5 +108,30 @@
 
   strong {
     color: var(--color-primary);
+  }
+}
+
+// What only the current week shows fades in as a week arrives in the center.
+.main .headingLabel,
+.main .subheading {
+  animation: fade-in 300ms ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  %column,
+  %column > :not(.hit),
+  .heading {
+    transition: none;
+  }
+
+  .main .headingLabel,
+  .main .subheading {
+    animation: none;
   }
 }

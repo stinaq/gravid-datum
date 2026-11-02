@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns';
 import { describe, expect, it } from 'vitest';
-import { pickerBounds, spinAnimation, spinDate, swipeDirection } from './spin';
+import { columnSlot, columnSpin, pickerBounds, spinDate, swipeDirection } from './spin';
 
 const lmp = new Date(2026, 0, 1);
 
@@ -21,22 +21,43 @@ describe('spinDate', () => {
 });
 
 describe('swipeDirection', () => {
-  it('ignores small movements', () => {
-    expect(swipeDirection(100, 120)).toBe(0);
-    expect(swipeDirection(100, 61)).toBe(0);
+  it('ignores small, slow movements', () => {
+    expect(swipeDirection(20, 50)).toBe(0);
+    expect(swipeDirection(-39, -100)).toBe(0);
+    expect(swipeDirection(0, 900)).toBe(0);
   });
 
   it('swipe left shows next week, swipe right previous week', () => {
-    expect(swipeDirection(200, 100)).toBe(1);
-    expect(swipeDirection(100, 200)).toBe(-1);
+    expect(swipeDirection(-100, 0)).toBe(1);
+    expect(swipeDirection(100, 0)).toBe(-1);
+    expect(swipeDirection(40, 0)).toBe(-1);
+  });
+
+  it('spins on a short, quick flick', () => {
+    expect(swipeDirection(-15, -600)).toBe(1);
+    expect(swipeDirection(15, 600)).toBe(-1);
+  });
+
+  it('does not spin when the flick goes back the other way', () => {
+    expect(swipeDirection(-15, 600)).toBe(0);
   });
 });
 
-describe('spinAnimation', () => {
-  it('maps direction to animation', () => {
-    expect(spinAnimation(1)).toBe('fromRight');
-    expect(spinAnimation(-1)).toBe('fromLeft');
-    expect(spinAnimation(0)).toBe('none');
+describe('columnSpin', () => {
+  it('only the direct neighbours spin the wheel', () => {
+    expect(columnSpin(-1)).toBe(-1);
+    expect(columnSpin(1)).toBe(1);
+    expect(columnSpin(0)).toBe(0);
+    expect(columnSpin(2)).toBe(0);
+    expect(columnSpin(-2)).toBe(0);
+  });
+});
+
+describe('columnSlot', () => {
+  it('maps offsets -2..2 to grid columns 1..5', () => {
+    expect(columnSlot(-2)).toBe(1);
+    expect(columnSlot(0)).toBe(3);
+    expect(columnSlot(2)).toBe(5);
   });
 });
 

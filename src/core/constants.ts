@@ -12,6 +12,10 @@ export const PICKER_YEARS_FORWARD = 2;
 
 /** Minimum horizontal swipe distance (px) that spins the wheel. */
 export const SWIPE_THRESHOLD_PX = 40;
+/** A quick flick spins the wheel even if it is shorter than the threshold. */
+export const SWIPE_VELOCITY_PX_PER_S = 400;
+/** Weeks rendered on each side of the current one. The outermost sit just off-screen. */
+export const WHEEL_REACH = 2;
 
 export const TEXTS = {
   appTitle: 'Graviditetsreferens',

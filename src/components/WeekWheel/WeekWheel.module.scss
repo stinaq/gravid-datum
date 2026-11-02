@@ -1,55 +1,28 @@
 .viewport {
+  container-type: inline-size;
   // clip (not hidden): a focused side column must not scroll the wheel sideways.
   overflow: clip;
-  touch-action: pan-y;
   // Fade the side columns out towards the screen edges, like a dial that continues.
   mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
 }
 
-.wheel {
+// Five slots: the current week (2fr), its neighbours (1fr) and one more week on each side,
+// just outside the viewport, so a week can slide in instead of popping up.
+// Width 150% and -25% offset put exactly the middle three in view.
+.track {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: repeat(var(--rows), auto);
   column-gap: var(--space-2);
+  // Width of the 2fr track: (150% of the viewport - 4 gaps) / 3.
+  --column-width: calc(50cqw - var(--space-2) * 4 / 3);
+  width: 150%;
+  margin-left: -25%;
   padding: var(--space-2) 0 var(--space-4);
-}
+  cursor: grab;
+  user-select: none;
 
-.slot {
-  grid-row: 1 / -1;
-  display: grid;
-  grid-template-rows: subgrid;
-  min-width: 0;
-}
-
-.none {
-  animation: none;
-}
-
-.fromRight {
-  animation: from-right 220ms ease-out;
-}
-
-.fromLeft {
-  animation: from-left 220ms ease-out;
-}
-
-@keyframes from-right {
-  from {
-    transform: translateX(18%);
-    opacity: 0.4;
-  }
-}
-
-@keyframes from-left {
-  from {
-    transform: translateX(-18%);
-    opacity: 0.4;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fromRight,
-  .fromLeft {
-    animation: none;
+  &:active {
+    cursor: grabbing;
   }
 }

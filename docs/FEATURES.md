@@ -77,7 +77,8 @@ All values are whole numbers with no decimals. Numbers use Swedish formatting (e
   gestational age, less prominent. Their values line up with the center column's rows, so
   they show the value only, without the label or the `värden för` note.
 - Swiping, tapping a side column, or pressing the previous/next buttons moves the
-  **reference date** ±7 days. The buttons sit above the wheel, and on touch devices also below
+  **reference date** ±7 days. The wheel follows the finger while swiping. It spins one week
+  when released after at least 40 px, or after a quick flick, and otherwise springs back. The buttons sit above the wheel, and on touch devices also below
   it. That date shows in
   the date picker, and F1/F2/F4 follow. The `+d` part stays the same.
 - At the range limits the missing neighbour is shown empty, its button is hidden, and you

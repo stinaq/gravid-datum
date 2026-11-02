@@ -160,6 +160,9 @@ export const ResultCard = ({ title, cost, highlighted }: ResultCardProps) => (
 - Date picker: `react-day-picker` (v10, Swedish locale), used only in components. Never build
   a custom picker. (v10 also publishes as `@daypicker/react`, which has the same API.)
 - Date math: `date-fns` (`differenceInCalendarDays`, `addDays`, `format`).
+- Animation and drag: `motion` (`motion/react`), used only in components. Elements move with
+  `layout` animations and the wheel drags with `drag`. Gesture results are passed to the hook
+  as plain numbers (e.g. drag offset and velocity), and the decision is a pure core function.
 
 ## Deployment
 

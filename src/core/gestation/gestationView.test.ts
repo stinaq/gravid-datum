@@ -21,24 +21,38 @@ describe('buildGestationView', () => {
     expect(buildGestationView(undefined, lmp, [crl])).toEqual({});
   });
 
-  it('builds the current week with neighbours', () => {
+  it('builds the current week with two weeks on each side', () => {
     const view = buildGestationView(lmp, addDays(lmp, 87), [crl]);
     expect(view.dueDate).toBe('2026-10-08');
     expect(view.error).toBeUndefined();
-    expect(view.wheel?.daysText).toBe('87');
-    expect(view.wheel?.current.heading).toBe('12+3');
-    expect(view.wheel?.current.values[0].value).toBe('55 mm');
-    expect(view.wheel?.previous?.heading).toBe('11+3');
-    expect(view.wheel?.previous?.values[0].value).toBe('45 mm');
-    expect(view.wheel?.next?.heading).toBe('13+3');
-    expect(view.wheel?.next?.values[0].value).toBe('70 mm');
+    const wheel = view.wheel;
+    expect(wheel?.daysText).toBe('87');
+    expect(wheel?.columns.map((c) => [c.offset, c.key, c.heading])).toEqual([
+      [-2, '73', '10+3'],
+      [-1, '80', '11+3'],
+      [0, '87', '12+3'],
+      [1, '94', '13+3'],
+      [2, '101', '14+3'],
+    ]);
+    expect(wheel?.columns.map((c) => c.values[0].value)).toEqual([
+      TEXTS.noData,
+      '45 mm',
+      '55 mm',
+      '70 mm',
+      TEXTS.noData,
+    ]);
+    expect(wheel?.previousHeading).toBe('11+3');
+    expect(wheel?.nextHeading).toBe('13+3');
   });
 
-  it('has no previous week in week 0 and no next week in week 42', () => {
-    expect(buildGestationView(lmp, addDays(lmp, 3), [crl]).wheel?.previous).toBeUndefined();
+  it('leaves out weeks outside 0+0 to 42+6', () => {
+    const first = buildGestationView(lmp, addDays(lmp, 3), [crl]).wheel;
+    expect(first?.columns.map((c) => c.offset)).toEqual([0, 1, 2]);
+    expect(first?.previousHeading).toBeUndefined();
     const last = buildGestationView(lmp, addDays(lmp, 42 * 7 + 6), [crl]).wheel;
-    expect(last?.next).toBeUndefined();
-    expect(last?.previous?.heading).toBe('41+6');
+    expect(last?.columns.map((c) => c.offset)).toEqual([-2, -1, 0]);
+    expect(last?.nextHeading).toBeUndefined();
+    expect(last?.previousHeading).toBe('41+6');
   });
 
   it('shows an error but keeps the due date when out of range', () => {

@@ -1,4 +1,4 @@
-import styles from "./WeekNav.module.scss";
+import styles from './WeekNav.module.scss';
 
 export type WeekNavProps = {
   /** Heading of the previous week. The button is left out when there is none. */
@@ -9,7 +9,7 @@ export type WeekNavProps = {
   onPrevious: () => void;
   onNext: () => void;
   /** The bottom bar is for thumbs on touch devices and is hidden on desktop. */
-  placement: "top" | "bottom";
+  placement: 'top' | 'bottom';
 };
 
 const Chevron = ({ className }: { className: string }) => (
@@ -47,12 +47,7 @@ export const WeekNav = ({
       </button>
     )}
     {nextText && (
-      <button
-        type="button"
-        className={styles.next}
-        onClick={onNext}
-        aria-label={`${nextLabel} ${nextText}`}
-      >
+      <button type="button" className={styles.next} onClick={onNext} aria-label={`${nextLabel} ${nextText}`}>
         {nextText}
         <Chevron className={styles.iconFlipped} />
       </button>

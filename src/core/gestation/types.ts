@@ -17,15 +17,19 @@ export type ValueView = {
 };
 
 export type WeekColumnView = {
+  /** Stable while spinning, so a week keeps its element as it moves between slots. */
+  key: string;
+  /** Weeks from the current one, -WHEEL_REACH to WHEEL_REACH. */
+  offset: number;
   heading: string;
   values: ValueView[];
 };
 
 export type WheelView = {
   daysText: string;
-  previous?: WeekColumnView;
-  current: WeekColumnView;
-  next?: WeekColumnView;
+  columns: WeekColumnView[];
+  previousHeading?: string;
+  nextHeading?: string;
 };
 
 export type GestationView = {

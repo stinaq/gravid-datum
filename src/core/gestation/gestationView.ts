@@ -1,4 +1,4 @@
-import { DAYS_PER_WEEK } from '../constants';
+import { DAYS_PER_WEEK, WHEEL_REACH } from '../constants';
 import { formatDate, formatNumber, formatWeeksAndDays } from '../format/format';
 import type { ReferenceTable } from '../referenceData/types';
 import { calculateDueDate, isWithinRange, toGestationalAge } from './gestationalAge';
@@ -6,16 +6,30 @@ import type { GestationView, WeekColumnView } from './types';
 import { validateDates } from './validateDates';
 import { buildValueView } from './valueView';
 
-const buildColumn = (totalDays: number, tables: ReferenceTable[]): WeekColumnView => {
+const headingFor = (totalDays: number): string => {
   const age = toGestationalAge(totalDays);
-  return {
-    heading: formatWeeksAndDays(age.weeks, age.days),
-    values: tables.map((table) => buildValueView(table, totalDays)),
-  };
+  return formatWeeksAndDays(age.weeks, age.days);
 };
 
-const buildNeighbour = (totalDays: number, tables: ReferenceTable[]): WeekColumnView | undefined =>
-  isWithinRange(totalDays) ? buildColumn(totalDays, tables) : undefined;
+const buildColumn = (totalDays: number, offset: number, tables: ReferenceTable[]): WeekColumnView => ({
+  key: String(totalDays),
+  offset,
+  heading: headingFor(totalDays),
+  values: tables.map((table) => buildValueView(table, totalDays)),
+});
+
+/** The current week plus up to WHEEL_REACH weeks on each side, left to right, within range. */
+const buildColumns = (totalDays: number, tables: ReferenceTable[]): WeekColumnView[] => {
+  const columns: WeekColumnView[] = [];
+  for (let offset = -WHEEL_REACH; offset <= WHEEL_REACH; offset++) {
+    const days = totalDays + offset * DAYS_PER_WEEK;
+    if (isWithinRange(days)) columns.push(buildColumn(days, offset, tables));
+  }
+  return columns;
+};
+
+const neighbourHeading = (totalDays: number): string | undefined =>
+  isWithinRange(totalDays) ? headingFor(totalDays) : undefined;
 
 export const buildGestationView = (
   lmp: Date | undefined,
@@ -33,9 +47,9 @@ export const buildGestationView = (
     dueDate,
     wheel: {
       daysText: formatNumber(totalDays),
-      previous: buildNeighbour(totalDays - DAYS_PER_WEEK, tables),
-      current: buildColumn(totalDays, tables),
-      next: buildNeighbour(totalDays + DAYS_PER_WEEK, tables),
+      columns: buildColumns(totalDays, tables),
+      previousHeading: neighbourHeading(totalDays - DAYS_PER_WEEK),
+      nextHeading: neighbourHeading(totalDays + DAYS_PER_WEEK),
     },
   };
 };

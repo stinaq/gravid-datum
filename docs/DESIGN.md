@@ -18,7 +18,11 @@ like an old hospital system: warm off-white, deep teal, lots of whitespace, soft
   - The side columns (previous and next week) are smaller and faded, and fade out slightly at
     the screen edges, so it reads as a wheel that continues. Their values must stay fully
     readable.
-  - Spinning animates the neighbour into the center.
+  - **Spinning is one continuous motion.** Each week keeps its own element and slides to its
+    new slot, restyling on the way (size, card, fade). One more week waits just off-screen on
+    each side to slide in. A drag follows the finger, and on release the wheel carries on from
+    where it was let go. Every column has the center's width, so only its position animates
+    and text never stretches.
   - **Previous/next buttons** are pill-shaped, each showing the neighbour's age with a chevron
     (`‹ 11+3`, `13+3 ›`). A missing neighbour has no button. They always sit above the wheel.
     On touch devices a second row sits below it, so the thumb reaches one from either end of

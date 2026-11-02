@@ -1,41 +1,32 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { MotionConfig, motion } from 'motion/react';
 import styles from './WeekWheel.module.scss';
 
 export type WeekWheelProps = {
-  previous?: ReactNode;
-  current: ReactNode;
-  next?: ReactNode;
   /** Number of grid rows each column spans (header + values), keeps rows aligned. */
   rowCount: number;
-  animation: 'none' | 'fromLeft' | 'fromRight';
-  animationKey: string;
-  onSwipeStart: (x: number) => void;
-  onSwipeEnd: (x: number) => void;
+  onPointerDown: () => void;
+  onDragStart: () => void;
+  onDragEnd: (offsetX: number, velocityX: number) => void;
+  children: ReactNode;
 };
 
-export const WeekWheel = ({
-  previous,
-  current,
-  next,
-  rowCount,
-  animation,
-  animationKey,
-  onSwipeStart,
-  onSwipeEnd,
-}: WeekWheelProps) => (
-  <div
-    className={styles.viewport}
-    onTouchStart={(e) => onSwipeStart(e.changedTouches[0].clientX)}
-    onTouchEnd={(e) => onSwipeEnd(e.changedTouches[0].clientX)}
-  >
-    <div
-      key={animationKey}
-      className={`${styles.wheel} ${styles[animation]}`}
-      style={{ '--rows': rowCount } as CSSProperties}
-    >
-      <div className={styles.slot}>{previous}</div>
-      <div className={styles.slot}>{current}</div>
-      <div className={styles.slot}>{next}</div>
+/** The track follows the finger, then springs back while the weeks animate to their new slots. */
+export const WeekWheel = ({ rowCount, onPointerDown, onDragStart, onDragEnd, children }: WeekWheelProps) => (
+  <MotionConfig reducedMotion="user">
+    <div className={styles.viewport}>
+      <motion.div
+        className={styles.track}
+        style={{ '--rows': rowCount } as CSSProperties}
+        drag="x"
+        dragSnapToOrigin
+        dragTransition={{ bounceStiffness: 400, bounceDamping: 40 }}
+        onPointerDownCapture={onPointerDown}
+        onDragStart={onDragStart}
+        onDragEnd={(_, info) => onDragEnd(info.offset.x, info.velocity.x)}
+      >
+        {children}
+      </motion.div>
     </div>
-  </div>
+  </MotionConfig>
 );
