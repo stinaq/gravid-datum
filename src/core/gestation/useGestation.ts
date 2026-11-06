@@ -36,6 +36,13 @@ export const useGestation = () => {
 
   return {
     title: TEXTS.appTitle,
+    info: {
+      buttonLabel: TEXTS.infoButtonLabel,
+      title: TEXTS.infoTitle,
+      intro: TEXTS.infoIntro,
+      measures: TEXTS.infoMeasures,
+      closeLabel: TEXTS.infoClose,
+    },
     lmp: {
       label: TEXTS.lmpLabel,
       valueText: lmp ? formatDate(lmp) : TEXTS.pickDate,

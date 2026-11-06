@@ -1,4 +1,5 @@
 import { DateField } from './components/DateField/DateField';
+import { InfoDialog } from './components/InfoDialog/InfoDialog';
 import { Message } from './components/Message/Message';
 import { Stat } from './components/Stat/Stat';
 import { ValueRow } from './components/ValueRow/ValueRow';
@@ -9,11 +10,14 @@ import styles from './App.module.scss';
 import { useGestation } from './core/gestation/useGestation';
 
 export const App = () => {
-  const { title, lmp, date, dueDate, error, wheel } = useGestation();
+  const { title, info, lmp, date, dueDate, error, wheel } = useGestation();
 
   return (
     <main className={styles.app}>
-      <h1 className={styles.title}>{title}</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>{title}</h1>
+        <InfoDialog {...info} />
+      </div>
       <div className={styles.inputs}>
         <DateField {...lmp} />
         <DateField {...date} />

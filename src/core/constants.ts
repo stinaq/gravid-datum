@@ -31,4 +31,10 @@ export const TEXTS = {
   nextWeek: 'Nästa vecka',
   errorBeforeLmp: 'Datumet är före senaste mens',
   errorOutOfRange: `Utanför intervallet (max ${MAX_COMPLETE_WEEKS}+${DAYS_PER_WEEK - 1})`,
+  infoButtonLabel: 'Om appen',
+  infoTitle: 'Om Graviditetsreferens',
+  infoIntro:
+    'Ett snabbverktyg för barnmorskor och annan vårdpersonal. Utifrån senaste mens och ett valt datum visar appen graviditetslängd och referensvärden för fostret och den gravida vid just den veckan.',
+  infoMeasures: 'Referensvärden: symfys-fundusmått, CRL, BPD, fostervikt, bukdiameter och femurlängd.',
+  infoClose: 'Stäng',
 } as const;
