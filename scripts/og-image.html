@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: "Inter";
+    src: local("Inter");
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+  body {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    background: #F7F4EF;
+    position: relative;
+  }
+  /* subtle decorative arcs echoing the week-wheel */
+  .arc {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #E3E2D9;
+  }
+  .arc.a1 { width: 900px; height: 900px; right: -420px; top: -270px; }
+  .arc.a2 { width: 700px; height: 700px; right: -320px; top: -170px; }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 88px;
+  }
+
+  .badge {
+    width: 108px;
+    height: 108px;
+    border-radius: 26px;
+    background: #1F4E4A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    box-shadow: 0 18px 40px rgba(31, 78, 74, 0.25);
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: #1F4E4A;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  p.tagline {
+    margin-top: 20px;
+    font-size: 27px;
+    color: #526863;
+    font-weight: 500;
+    max-width: 640px;
+    line-height: 1.4;
+  }
+
+  .wheel {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .col {
+    border-radius: 16px;
+    padding: 16px 22px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .col .age {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .col .val {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+
+  .col.side {
+    opacity: 0.45;
+  }
+  .col.side .age { color: #526863; }
+  .col.side .val { color: #1B3633; }
+
+  .col.center {
+    background: #FFFDF9;
+    box-shadow: 0 10px 28px rgba(31, 78, 74, 0.12);
+  }
+  .col.center .age { color: #1F4E4A; }
+  .col.center .val { color: #1B3633; }
+
+  .footer-tag {
+    margin-top: 44px;
+    font-size: 19px;
+    color: #9A4A31;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+  <div class="arc a1"></div>
+  <div class="arc a2"></div>
+  <div class="content">
+    <div class="badge">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+        <g transform="translate(-3 0)">
+          <circle cx="30" cy="11.5" r="6.5" fill="#fff"/>
+          <path fill="#fff" d="M27 20C22.5 22 20.5 27 21 33C21.4 38 23 41 24.5 45L23.5 57Q23.3 59.5 25.5 59.5L30.5 59.5Q32.6 59.5 32.8 57.5L34 50.5C44.5 51 51.5 42 47.5 34C45.5 30 41.5 29 38.5 30C38.5 27.5 37 25 35 23.5C33.5 22.3 32.5 21 32.3 19.5Z"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Graviditetsreferens</h1>
+    <p class="tagline">Referensvärden för foster och gravid, vecka för vecka &mdash; snabbt uppslag för barnmorskor och vårdpersonal.</p>
+    <div class="wheel">
+      <div class="col side">
+        <div class="age">11+3</div>
+        <div class="val">34 mm</div>
+      </div>
+      <div class="col center">
+        <div class="age">12+3</div>
+        <div class="val">41 mm</div>
+      </div>
+      <div class="col side">
+        <div class="age">13+3</div>
+        <div class="val">49 mm</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
